@@ -5,7 +5,8 @@ const axios = require('axios');
 const excel = require('exceljs');
 const { Readable } = require('stream');
 const { connection } = require('../config/db');
-const { sqlQuery } = require("./user")
+const { sqlQuery } = require("./user");
+
 // POST route to create new posts
 postRouter.post('/', async (req, res) => {
     try {
@@ -33,9 +34,9 @@ postRouter.get('/', async (req, res) => {
         const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
 
         if (postsRows.length > 0) {
-            return res.status(200).json({ status: 'added', data: response.data });
+            return res.status(200).json({ status: true, data: response.data });
         } else {
-            return res.status(200).json({ status: 'not added', data: response.data });
+            return res.status(200).json({ status: false, data: response.data });
         }
     } catch (error) {
         console.error('Error fetching posts:', error);
@@ -54,7 +55,7 @@ postRouter.get('/download/:userId', async (req, res) => {
         const worksheet = workbook.addWorksheet('Posts');
         worksheet.columns = [
             { header: 'UserId', key: 'userId', width: 10 },
-            { header: 'Postid', key: 'id', width: 10 },
+            { header: 'PostId', key: 'id', width: 10 },
             { header: 'Title', key: 'title', width: 60 },
             { header: 'Body', key: 'body', width: 80 }
         ];

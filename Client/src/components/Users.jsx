@@ -9,24 +9,15 @@ import {
   TableContainer,
   Button,
 } from "@chakra-ui/react";
-import { BaseUrl } from "../App";
-import { Post } from "./Post";
 
+import { Post } from "./Post";
+import { BaseUrl } from "./Home";
+import { useNavigate } from "react-router-dom";
 const Users = ({ data }) => {
-  console.log(data);
+  const navigate = useNavigate();
 
   const handleOpen = async (userId) => {
-    // let res = await fetch(`${BaseUrl}/open`, {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify({
-    //     user,
-    //   }),
-    // });
-    // let data = res.json();
-    <Post />;
-    
-    console.log(userId);
+    navigate(`/post?userId=${userId}`);
   };
 
   const handleAdd = async (user) => {
