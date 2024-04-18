@@ -16,8 +16,11 @@ import { useNavigate } from "react-router-dom";
 const Users = ({ data }) => {
   const navigate = useNavigate();
 
-  const handleOpen = async (userId) => {
-    navigate(`/post?userId=${userId}`);
+  const handleOpen = async (user) => {
+    navigate(`/post?userId=${user.id}`, {
+      state: { name: user.name, company: user.company.name },
+    });
+    // console.log(data);
   };
 
   const handleAdd = async (user) => {
@@ -67,7 +70,7 @@ const Users = ({ data }) => {
                       Add
                     </Button>
                   ) : (
-                    <Button onClick={() => handleOpen(e.id)} colorScheme="blue">
+                    <Button onClick={() => handleOpen(e)} colorScheme="blue">
                       Open
                     </Button>
                   )}

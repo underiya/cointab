@@ -4,7 +4,7 @@ import { useState } from "react";
 import Users from "./Users";
 export const BaseUrl = `https://cointab-mx5l.onrender.com`;
 
-export const fetchData = async (cb,endpoint) => {
+export const fetchData = async (cb, endpoint) => {
   try {
     let res = await fetch(`${BaseUrl}/${endpoint}`);
     let data = await res.json();
@@ -22,7 +22,7 @@ function Home() {
   const handleUsers = async () => {
     try {
       setloading(true);
-      await fetchData(setData,"users");
+      await fetchData(setData, "users");
       setloading(false);
     } catch (error) {
       console.error("Error data", error);
