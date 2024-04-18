@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { fetchData } from "./Home";
+import { BaseUrl, fetchData } from "./Home";
 import { useLocation, useParams } from "react-router-dom";
 import { Button, Card, CardBody, Heading, Text } from "@chakra-ui/react";
+import axios from "axios";
 
 export const Post = () => {
   const location = useLocation();
@@ -18,7 +19,17 @@ export const Post = () => {
   console.log(data.data);
 
   const handleBulk = () => {
-    fetchData(console.log, `posts/download/${value}`);
+    const postData = async (url, data) => {
+      try {
+        let res = await axios.post(url, data);
+
+        console.log("response", res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    postData(`${BaseUrl}/posts`, data.data);
   };
 
   return (

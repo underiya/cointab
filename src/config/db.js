@@ -1,4 +1,4 @@
-const mysql = require("mysql2");
+const mysql = require('mysql2');
 require("dotenv").config();
 const connection = mysql.createConnection(`${process.env.MYSQL_URL}?ssl-mode=REQUIRED`);
 
@@ -12,7 +12,7 @@ connection.connect((err) => {
     }
 });
 
-module.exports = {
-    connection
-}
+module.exports =
+    connection.promise();
+
 

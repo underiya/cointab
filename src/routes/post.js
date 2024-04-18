@@ -4,19 +4,22 @@ const postRouter = express.Router();
 const axios = require('axios');
 const excel = require('exceljs');
 const { Readable } = require('stream');
-const { connection } = require('../config/db');
+const connection = require('../config/db');
 const { sqlQuery } = require("./user");
 
 // POST route to create new posts
 postRouter.post('/', async (req, res) => {
     try {
         const postsData = req.body;
-
         const insertValues = postsData.map(post => [post.id, post.userId, post.title, post.body]);
         const query = 'INSERT INTO posts (id, userId, title, body) VALUES ?';
 
-        await connection.query(query, [insertValues]);
+        connection.query(query, [insertValues], (err) => {
+            if (err) throw err;
+            connection.end();
+        });
 
+        // console.log('body', insertValues)
         res.status(200).json({ message: 'Posts created successfully' });
     } catch (error) {
         console.error('Error creating posts:', error);

@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-const { connection } = require('../config/db');
+const connection = require('../config/db');
 
 const userRouter = express.Router();
 
